@@ -1,5 +1,6 @@
 package ie.alvarop.sample.count.test;
 
+import static org.junit.Assert.assertTrue;
 import ie.alvarop.sample.count.CountIt;
 
 import org.junit.After;
@@ -21,28 +22,51 @@ public class CountTest {
 	public void test() {
 		CountIt countit = new CountIt();
 		String result = countit.resolve("[]");
-		assert result.equalsIgnoreCase("YES");
+		assertTrue(result.equalsIgnoreCase("YES"));
 		result = countit.resolve("[5,?]");
-		assert result.equalsIgnoreCase("YES");
+		assertTrue(result.equalsIgnoreCase("YES"));
+		result = countit.resolve("[[5,?],?]");
+		assertTrue(result.equalsIgnoreCase("10"));
 	}
 	
 	@Test
 	public void test2() {
 		CountIt countit = new CountIt();
 		int commaPos = countit.getCommaPos("[5,?]", 0);
-		assert commaPos == 2;
+		assertTrue(commaPos == 2);
 	}
 
 	@Test
 	public void test3() {
 		CountIt countit = new CountIt();
 		String reduc = countit.reduce("[5,?]");
-		assert reduc.equalsIgnoreCase("10");
+		assertTrue(reduc.equalsIgnoreCase("10"));
 		reduc = countit.reduce("[6,?]");
-		assert reduc.equalsIgnoreCase("12");
+		assertTrue(reduc.equalsIgnoreCase("12"));
 		reduc = countit.reduce("[?,6]");
-		assert reduc.equalsIgnoreCase("12");
+		assertTrue(reduc.equalsIgnoreCase("12"));
 		reduc = countit.reduce("[?,?]");
-		assert reduc.equalsIgnoreCase("??");
+		assertTrue(reduc.equalsIgnoreCase("??"));
+		reduc = countit.reduce("[??,?]");
+		assertTrue(reduc.equalsIgnoreCase("????"));
+		reduc = countit.reduce("[?,??]");
+		assertTrue(reduc.equalsIgnoreCase("????"));
+		reduc = countit.reduce("[??,10]");
+		assertTrue(reduc.equalsIgnoreCase("20"));
+		reduc = countit.reduce("[10,??]");
+		assertTrue(reduc.equalsIgnoreCase("20"));
+		reduc = countit.reduce("[????,10]");
+		assertTrue(reduc.equalsIgnoreCase("NO"));		
+	}
+	
+	@Test
+	public void test4() {
+		CountIt countit = new CountIt();
+		String range = countit.range("[5,?]", 2);
+		assertTrue(range.equalsIgnoreCase("[5,?]"));
+		range = countit.range("[[5,?],?]", 3);
+		assertTrue(range.equalsIgnoreCase("[5,?]"));
+		range = countit.range("[[5,?],?]", 6);
+		assertTrue(range.equalsIgnoreCase(null));
 	}
 }

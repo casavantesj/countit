@@ -15,18 +15,20 @@ public class CountIt {
 		String currVal = val.substring(1, val.length()-1);
 		String splitted [] = currVal.split(",");
 		if (splitted[0].startsWith("?"))
-			if (splitted[0].startsWith("?"))
-				return splitted[0] + splitted[1];
-			else
+			if (splitted[1].startsWith("?")) {
+				int left = splitted[0].length();
+				int right = splitted[1].length();
+				if (left >= right)
+					return splitted[0] + splitted[0];
+				return splitted[1]+ splitted[1];
+			} else
 				return String.valueOf(Integer.parseInt(splitted[1]) * 2);
 		else
 			return String.valueOf(Integer.parseInt(splitted[0]) * 2);
-		
-		/*if (splitted[0].startsWith("?")) {
-			if (splitted[1].startsWith("?")) {
-				
-			}
-		}*/
+	}
+
+	public String range(String val, int commaPos) {
+		return val;
 	}
 
 }
