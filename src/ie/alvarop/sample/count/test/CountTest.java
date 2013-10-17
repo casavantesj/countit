@@ -30,14 +30,14 @@ public class CountTest {
 	}
 	
 	@Test
-	public void test2() {
+	public void testCommaPos() {
 		CountIt countit = new CountIt();
 		int commaPos = countit.getCommaPos("[5,?]", 0);
 		assertTrue(commaPos == 2);
 	}
 
 	@Test
-	public void test3() {
+	public void testReduce() {
 		CountIt countit = new CountIt();
 		String reduc = countit.reduce("[5,?]");
 		assertTrue(reduc.equalsIgnoreCase("10"));
@@ -60,13 +60,13 @@ public class CountTest {
 	}
 	
 	@Test
-	public void test4() {
+	public void testRange() {
 		CountIt countit = new CountIt();
 		String range = countit.range("[5,?]", 2);
 		assertTrue(range.equalsIgnoreCase("[5,?]"));
 		range = countit.range("[[5,?],?]", 3);
 		assertTrue(range.equalsIgnoreCase("[5,?]"));
 		range = countit.range("[[5,?],?]", 6);
-		assertTrue(range.equalsIgnoreCase(null));
+		assertTrue(range == null);
 	}
 }

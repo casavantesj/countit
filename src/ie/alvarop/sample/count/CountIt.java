@@ -28,7 +28,11 @@ public class CountIt {
 	}
 
 	public String range(String val, int commaPos) {
-		return val;
+		char prev = val.charAt(commaPos - 1);
+		char next = val.charAt(commaPos + 1);
+		
+		if (prev == ']' || next == '[') return null;
+		return val.substring(commaPos - 2, commaPos + 3);
 	}
 
 }
