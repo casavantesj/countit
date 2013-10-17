@@ -4,12 +4,10 @@ public class CountIt {
 
 	public String resolve(String val) {
 		String curr;
-		if (val.startsWith("["))
+		if (val.startsWith("[") && getCommaPos(val, 0) > 1 && val.length() >=5)
 			for (curr = oneRun(val); curr.startsWith("["); curr = oneRun(curr));
-		else if (val.startsWith("?"))
-			curr = "NO";
 		else 
-			curr = "YES";
+			curr = "NO";
 		return curr;
 	}
 

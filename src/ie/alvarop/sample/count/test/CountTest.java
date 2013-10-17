@@ -26,7 +26,7 @@ public class CountTest {
 		result = countit.resolve("[[5,?],?]");
 		assertTrue(result.equalsIgnoreCase("YES"));
 		result = countit.resolve("5");
-		assertTrue(result.equalsIgnoreCase("YES"));
+		assertTrue(result.equalsIgnoreCase("NO"));
 		result = countit.resolve("[3,?]");
 		assertTrue(result.equalsIgnoreCase("YES"));
 		result = countit.resolve("[?,[?,?]]");
