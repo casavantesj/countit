@@ -4,7 +4,12 @@ public class CountIt {
 
 	public String resolve(String val) {
 		String curr;
-		for (curr = oneRun(val); curr.startsWith("["); curr = oneRun(curr));
+		if (val.startsWith("["))
+			for (curr = oneRun(val); curr.startsWith("["); curr = oneRun(curr));
+		else if (val.startsWith("?"))
+			curr = "NO";
+		else 
+			curr = "YES";
 		return curr;
 	}
 
@@ -62,10 +67,12 @@ public class CountIt {
 
 	public String oneRun(String orig) {
 		String range = nextRange(orig, 0);
+		if (range == null) return orig;
 		String reduced = reduce(range);
 		if (reduced.equalsIgnoreCase("NO")) return "NO";
 		String replaced = replace(orig, range, reduced);
 		if (replaced.startsWith("[")) return replaced;
+		if (replaced.startsWith("?")) return "NO";
 		return "YES";
 	}
 
