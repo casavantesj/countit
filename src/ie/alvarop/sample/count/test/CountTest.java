@@ -11,8 +11,6 @@ import static ie.alvarop.sample.count.CountIt.YES;
 
 public class CountTest {
 
-	private static final String	YES	= "YES";
-
 	@Before
 	public void setUp() throws Exception {
 		
