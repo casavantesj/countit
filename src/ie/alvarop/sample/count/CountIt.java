@@ -33,6 +33,8 @@ public class CountIt {
 		
 		if (prev == ']' || next == '[') return null;
 		return val.substring(commaPos - 2, commaPos + 3);
+		
+		
 	}
 
 }
