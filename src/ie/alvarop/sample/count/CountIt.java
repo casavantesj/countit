@@ -2,12 +2,15 @@ package ie.alvarop.sample.count;
 
 public class CountIt {
 
+	public static final String	YES	= "YES";
+	public static final String	NO	= "NO";
+
 	public String resolve(String val) {
 		String curr;
 		if (val.startsWith("[") && getCommaPos(val, 0) > 1 && val.length() >=5)
 			for (curr = oneRun(val); curr.startsWith("["); curr = oneRun(curr));
 		else 
-			curr = "NO";
+			curr = NO;
 		return curr;
 	}
 
@@ -27,16 +30,16 @@ public class CountIt {
 				return splitted[1]+ splitted[1];
 			} else {
 				int right = Integer.parseInt(splitted[1]);
-				return right%left == 0?String.valueOf(right * 2):"NO";
+				return right%left == 0?String.valueOf(right * 2):NO;
 			}
 		} else {
 			int left = Integer.parseInt(splitted[0]);
 			if (splitted[1].startsWith("?")) {
 				int right = splitted[1].length();
-				return left%right == 0?String.valueOf(left * 2):"NO";
+				return left%right == 0?String.valueOf(left * 2):NO;
 			} else {
 				int right = Integer.parseInt(splitted[1]);
-				return left == right?String.valueOf(left + right):"NO";
+				return left == right?String.valueOf(left + right):NO;
 			}
 		}
 	}
@@ -67,11 +70,11 @@ public class CountIt {
 		String range = nextRange(orig, 0);
 		if (range == null) return orig;
 		String reduced = reduce(range);
-		if (reduced.equalsIgnoreCase("NO")) return "NO";
+		if (reduced.equalsIgnoreCase(NO)) return NO;
 		String replaced = replace(orig, range, reduced);
 		if (replaced.startsWith("[")) return replaced;
-		if (replaced.startsWith("?")) return "NO";
-		return "YES";
+		if (replaced.startsWith("?")) return NO;
+		return YES;
 	}
 
 }

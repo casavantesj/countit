@@ -6,8 +6,12 @@ import ie.alvarop.sample.count.CountIt;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import static ie.alvarop.sample.count.CountIt.NO;
+import static ie.alvarop.sample.count.CountIt.YES;
 
 public class CountTest {
+
+	private static final String	YES	= "YES";
 
 	@Before
 	public void setUp() throws Exception {
@@ -22,21 +26,21 @@ public class CountTest {
 	public void test() {
 		CountIt countit = new CountIt();
 		String result = countit.resolve("[5,?]");
-		assertTrue(result.equalsIgnoreCase("YES"));
+		assertTrue(result.equalsIgnoreCase(YES));
 		result = countit.resolve("[[5,?],?]");
-		assertTrue(result.equalsIgnoreCase("YES"));
+		assertTrue(result.equalsIgnoreCase(YES));
 		result = countit.resolve("5");
-		assertTrue(result.equalsIgnoreCase("NO"));
+		assertTrue(result.equalsIgnoreCase(NO));
 		result = countit.resolve("[3,?]");
-		assertTrue(result.equalsIgnoreCase("YES"));
+		assertTrue(result.equalsIgnoreCase(YES));
 		result = countit.resolve("[?,[?,?]]");
-		assertTrue(result.equalsIgnoreCase("NO"));
+		assertTrue(result.equalsIgnoreCase(NO));
 		result = countit.resolve("[[[?,?],5],?]");
-		assertTrue(result.equalsIgnoreCase("NO"));
+		assertTrue(result.equalsIgnoreCase(NO));
 		result = countit.resolve("[2,[3,?]]");
-		assertTrue(result.equalsIgnoreCase("NO"));
+		assertTrue(result.equalsIgnoreCase(NO));
 		result = countit.resolve("[[[5,?],10],[?,?]]");
-		assertTrue(result.equalsIgnoreCase("YES"));
+		assertTrue(result.equalsIgnoreCase(YES));
 	}
 	
 	@Test
@@ -68,11 +72,11 @@ public class CountTest {
 		reduc = countit.reduce("[10,??]");
 		assertTrue(reduc.equalsIgnoreCase("20"));
 		reduc = countit.reduce("[20,10]");
-		assertTrue(reduc.equalsIgnoreCase("NO"));
+		assertTrue(reduc.equalsIgnoreCase(NO));
 		reduc = countit.reduce("[10,????]");
-		assertTrue(reduc.equalsIgnoreCase("NO"));
+		assertTrue(reduc.equalsIgnoreCase(NO));
 		reduc = countit.reduce("[????,10]");
-		assertTrue(reduc.equalsIgnoreCase("NO"));
+		assertTrue(reduc.equalsIgnoreCase(NO));
 		reduc = countit.reduce("[????,20]");
 		assertTrue(reduc.equalsIgnoreCase("40"));
 	}
@@ -118,8 +122,8 @@ public class CountTest {
 		String result = countit.oneRun("[[5,?],?]");
 		assertTrue("Received resilt " + result, result.equalsIgnoreCase("[10,?]"));
 		result = countit.oneRun("[10,?]");
-		assertTrue("Received resilt " + result, result.equalsIgnoreCase("YES"));
+		assertTrue("Received resilt " + result, result.equalsIgnoreCase(YES));
 		result = countit.oneRun("[[5,2],?]");
-		assertTrue("Received resilt " + result, result.equalsIgnoreCase("NO"));
+		assertTrue("Received resilt " + result, result.equalsIgnoreCase(NO));
 	}
 }
